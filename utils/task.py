@@ -4,11 +4,11 @@ from utils import datefonc
 pathdb = "db.json"
 
 
-def print_task(task):
-    id = task["id"]
-    name = task["name"]
-    desc = task["description"]
-    status = task["status"]
+def print_task(task, db):
+    id = db[task]["id"]
+    name = db[task]["name"]
+    desc = db[task]["description"]
+    status = db[task]["status"]
     print(
         f"id : {id}, name : {name}, description : {desc}, status : {status}")
 
@@ -22,17 +22,20 @@ def delete_from_ts(index):
 def task_list(status="all"):
     db = wrjson.read_from_json_file(pathdb)
     for task in db:
-        if status == "all":
-            print_task(task)
-        elif status == "done":
-            if task["status"] == "done":
-                print_task(task)
-        elif status == "todo":
-            if task["status"] == "todo":
-                print_task(task)
-        elif status == "in-progress":
-            if task["status"] == "in-progress":
-                print_task(task)
+        for index in task:
+            index = int(index)
+            print(index)
+            if status == "all":
+                print_task(task, db)
+            elif status == "done":
+                if task["status"] == "done":
+                    print_task(task, db)
+            elif status == "todo":
+                if task["status"] == "todo":
+                    print_task(task, db)
+            elif status == "in-progress":
+                if task["status"] == "in-progress":
+                    print_task(task, db)
     print("---")
     print(
         f"End of the list, if you can't see anythings there is probably no task with the status '{status}' in the database.")
@@ -96,5 +99,5 @@ class Task:
 
     def add_new_task(self):
         db = wrjson.read_from_json_file(pathdb)
-        db.append(self.class_to_json())
+        db[self.id] = self.class_to_json()
         wrjson.write_to_json_file(pathdb, db)
