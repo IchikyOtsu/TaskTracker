@@ -28,7 +28,7 @@ def list(status="all"):
 @click.argument('Task_ID')
 def mark_done(task_id):
     try:
-        task_id = int(task_id)
+        task_is_int = int(task_id)
     except:
         print("Id have to be an integer, you fool...")
         return
@@ -40,7 +40,7 @@ def mark_done(task_id):
 @click.argument('Task_ID')
 def delete(task_id):
     try:
-        task_id = int(task_id)
+        task_is_int = int(task_id)
     except:
         print("Id have to be an integer")
         return

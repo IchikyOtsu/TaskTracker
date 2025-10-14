@@ -15,7 +15,7 @@ def print_task(task, db):
 
 def delete_from_ts(index):
     db = wrjson.read_from_json_file(pathdb)
-    db.pop(index)
+    db[index] = {}
     wrjson.write_to_json_file(pathdb, db)
 
 
@@ -24,18 +24,19 @@ def task_list(status="all"):
     for task in db:
         for index in task:
             index = int(index)
-            print(index)
-            if status == "all":
-                print_task(task, db)
-            elif status == "done":
-                if task["status"] == "done":
-                    print_task(task, db)
-            elif status == "todo":
-                if task["status"] == "todo":
-                    print_task(task, db)
-            elif status == "in-progress":
-                if task["status"] == "in-progress":
-                    print_task(task, db)
+            if db[task] != {}:
+                if status == "all":
+                    if db[task]["status"]:
+                        print_task(task, db)
+                elif status == "done":
+                    if db[task]["status"] == "done":
+                        print_task(task, db)
+                elif status == "todo":
+                    if db[task]["status"] == "todo":
+                        print_task(task, db)
+                elif status == "in-progress":
+                    if db[task]["status"] == "in-progress":
+                        print_task(task, db)
     print("---")
     print(
         f"End of the list, if you can't see anythings there is probably no task with the status '{status}' in the database.")

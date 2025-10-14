@@ -18,6 +18,9 @@ def read_from_json_file(path):
 
 def create_new_idTask(path):
     db = read_from_json_file(path)
+    for index in db:
+        if db[index] == {}:
+            return index
     return len(db)
 
 
