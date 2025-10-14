@@ -1,12 +1,24 @@
 import json
 from utils import wrjson
 from utils import datefonc
+pathdb = "db.json"
+
+
+def task_list(status="all"):
+    db = wrjson.read_from_json_file(pathdb)
+    for task in db:
+        id = task["id"]
+        name = task["name"]
+        desc = task["description"]
+        status = task["status"]
+        print(
+            f"id : {id}, name : {name}, description : {desc}, status : {status}")
 
 
 class Task:
     def __init__(self, name):
         current_timestamp = datefonc.get_current_time_intimestamp()
-        newid = wrjson.create_new_idTask("db.json")
+        newid = wrjson.create_new_idTask(pathdb)
         self.id = newid
         self.name = name
         self.description = None
@@ -39,6 +51,6 @@ class Task:
         return json_object
 
     def add_new_task(self):
-        db = wrjson.read_from_json_file("db.json")
+        db = wrjson.read_from_json_file(pathdb)
         db.append(self.class_to_json())
-        wrjson.write_to_json_file("db.json", db)
+        wrjson.write_to_json_file(pathdb, db)

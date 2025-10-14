@@ -15,8 +15,13 @@ def add(task_name):
     new_Task.add_new_task()
 
 
-cli.add_command(add)
+@click.command()
+def list():
+    ts.task_list()
 
+
+cli.add_command(add)
+cli.add_command(list)
 
 if __name__ == "__main__":
     cli()
