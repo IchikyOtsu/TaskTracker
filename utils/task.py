@@ -4,10 +4,11 @@ from utils import datefonc
 
 
 class Task:
-    def __init__(self):
+    def __init__(self, name):
         current_timestamp = datefonc.get_current_time_intimestamp()
         newid = wrjson.create_new_idTask("db.json")
         self.id = newid
+        self.name = name
         self.description = None
         self.statusid = 0
         self.status = "To Do"
@@ -16,6 +17,7 @@ class Task:
 
     def __str__(self):
         idstr = f"'id':'{self.id}',"
+        namestr = f"'name':'{self.name}',"
         descstr = f"'description':'{self.description}',"
         statusidstr = f"'statusId':'{self.statusid}',"
         statusstr = f"'status':'{self.status}',"
@@ -27,6 +29,7 @@ class Task:
     def class_to_json(self):
         json_object = {}
         json_object["id"] = self.id
+        json_object["name"] = self.name
         json_object["description"] = self.description
         json_object["statusId"] = self.statusid
         json_object["status"] = self.status
@@ -37,5 +40,5 @@ class Task:
 
     def add_new_task(self):
         db = wrjson.read_from_json_file("db.json")
-        db.append(self.class_to_json(0))
+        db.append(self.class_to_json())
         wrjson.write_to_json_file("db.json", db)

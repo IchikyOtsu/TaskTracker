@@ -11,8 +11,8 @@ def cli():
 @click.argument('task_name')
 def add(task_name):
     click.echo(task_name + " has been successfully created !")
-    new_Task = ts.Task()
-    print(new_Task)
+    new_Task = ts.Task(task_name)
+    new_Task.add_new_task()
 
 
 cli.add_command(add)
