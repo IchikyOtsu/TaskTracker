@@ -32,6 +32,27 @@ def task_list(status="all"):
         f"End of the list, if you can't see anythings there is probably no task with the status '{status}' in the database.")
 
 
+def ts_mark_done(index):
+    db = wrjson.read_from_json_file(pathdb)
+    db[index]["status"] = "done"
+    db[index]["statusId"] = "2"
+    wrjson.write_to_json_file(pathdb, db)
+
+
+def ts_mark_in_progress(index):
+    db = wrjson.read_from_json_file(pathdb)
+    db[index]["status"] = "in-progress"
+    db[index]["statusId"] = "1"
+    wrjson.write_to_json_file(pathdb, db)
+
+
+def ts_mark_to_do(index):
+    db = wrjson.read_from_json_file(pathdb)
+    db[index]["status"] = "todo"
+    db[index]["statusId"] = "0"
+    wrjson.write_to_json_file(pathdb, db)
+
+
 class Task:
     def __init__(self, name):
         current_timestamp = datefonc.get_current_time_intimestamp()
