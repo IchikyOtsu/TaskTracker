@@ -16,8 +16,12 @@ def add(task_name):
 
 
 @click.command()
-def list():
-    ts.task_list()
+@click.option('--status', default="all", help='todo / done / in-progress')
+def list(status="all"):
+    if status not in ["all", "todo", "done", "in-progress"]:
+        print("Sorry you have to type exactly todo or done or in-progress")
+    else:
+        ts.task_list(status)
 
 
 cli.add_command(add)

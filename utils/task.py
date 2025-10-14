@@ -4,15 +4,31 @@ from utils import datefonc
 pathdb = "db.json"
 
 
+def print_task(task):
+    id = task["id"]
+    name = task["name"]
+    desc = task["description"]
+    status = task["status"]
+    print(
+        f"id : {id}, name : {name}, description : {desc}, status : {status}")
+
+
 def task_list(status="all"):
     db = wrjson.read_from_json_file(pathdb)
     for task in db:
-        id = task["id"]
-        name = task["name"]
-        desc = task["description"]
-        status = task["status"]
-        print(
-            f"id : {id}, name : {name}, description : {desc}, status : {status}")
+        if status == "all":
+            print_task(task)
+        elif status == "done":
+            if task["status"] == "done":
+                print_task(task)
+        elif status == "todo":
+            if task["status"] == "todo":
+                print_task(task)
+        elif status == "in-progress":
+            if task["status"] == "in-progress":
+                print_task(task)
+    print(
+        f"End of the list, if you can't see anythings there is probably no task with the status {status} in the database.")
 
 
 class Task:
@@ -23,7 +39,7 @@ class Task:
         self.name = name
         self.description = None
         self.statusid = 0
-        self.status = "To Do"
+        self.status = "todo"
         self.createAT = current_timestamp
         self.updateAT = current_timestamp
 
