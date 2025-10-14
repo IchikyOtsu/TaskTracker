@@ -30,11 +30,25 @@ def mark_done(task_id):
     try:
         task_id = int(task_id)
     except:
-        print("Id have to be an integer")
+        print("Id have to be an integer, you fool...")
+        return
     ts.ts_mark_done(task_id)
     print(f"The Task number {task_id} has changed is status for done")
 
 
+@click.command()
+@click.argument('Task_ID')
+def delete(task_id):
+    try:
+        task_id = int(task_id)
+    except:
+        print("Id have to be an integer")
+        return
+    ts.delete_from_ts(task_id)
+    print(f"Task Number {task_id} has been removed")
+
+
+cli.add_command(delete)
 cli.add_command(add)
 cli.add_command(list)
 cli.add_command(mark_done)

@@ -13,6 +13,12 @@ def print_task(task):
         f"id : {id}, name : {name}, description : {desc}, status : {status}")
 
 
+def delete_from_ts(index):
+    db = wrjson.read_from_json_file(pathdb)
+    db.pop(index)
+    wrjson.write_to_json_file(pathdb, db)
+
+
 def task_list(status="all"):
     db = wrjson.read_from_json_file(pathdb)
     for task in db:
