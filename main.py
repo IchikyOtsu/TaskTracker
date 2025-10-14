@@ -1,10 +1,5 @@
 import click
-
-# Fonction de test
-
-
-def printfonct():
-    print("Hello World")
+from utils import task as ts
 
 
 @click.group()
@@ -15,8 +10,9 @@ def cli():
 @click.command()
 @click.argument('task_name')
 def add(task_name):
-    click.echo(task_name)
-    printfonct()
+    click.echo(task_name + " has been successfully created !")
+    new_Task = ts.Task()
+    print(new_Task)
 
 
 cli.add_command(add)
