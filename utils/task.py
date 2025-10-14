@@ -1,16 +1,19 @@
 import json
 import wrjson
-import datetime
+import datefonc
 
 
 class Task:
     def __init__(self, id):
-        datetime.date
-        id = id
-        description = None
-        status = 0
-        createAT =
-        updateAT =
+        current_timestamp = datefonc.get_current_time_intimestamp()
+        self.id = id
+        self.description = None
+        self.statusid = 0
+        self.status = "To Do"
+        self.createAT = current_timestamp
+        self.updateAT = current_timestamp
 
 
-TASK = Task(1,)
+TASK = Task(1)
+
+print(TASK.createAT)
