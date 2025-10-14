@@ -29,7 +29,7 @@ def task_list(status="all"):
                 print_task(task)
     print("---")
     print(
-        f"End of the list, if you can't see anythings there is probably no task with the status {status} in the database.")
+        f"End of the list, if you can't see anythings there is probably no task with the status '{status}' in the database.")
 
 
 class Task:
