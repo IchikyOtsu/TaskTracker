@@ -1,15 +1,16 @@
 import json
-f = open(db.json,r+)
+import wrjson
+import datetime
 
-class Task: 
-    def __init__(self,id,created): 
+
+class Task:
+    def __init__(self, id):
+        datetime.date
         id = id
         description = None
-        status = 0 
-        createAT = created
-        updateAT = createAT
-    def init_task(self):
-        task = Task()
-        f
+        status = 0
+        createAT =
+        updateAT =
 
 
+TASK = Task(1,)
