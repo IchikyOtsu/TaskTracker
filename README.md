@@ -35,4 +35,3 @@ This project is licensed under the MIT License.
 ## Contact Information
 For any inquiries, please contact me !
 
-||https://roadmap.sh/projects/task-tracker||
