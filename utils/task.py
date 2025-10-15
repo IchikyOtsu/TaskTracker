@@ -5,6 +5,13 @@ pathdb = "db.json"
 
 
 def print_task(task, db):
+    """
+    Prints the details of a task from the database.
+    
+    Args:
+        task (str): The task identifier.
+        db (dict): The database containing task information.
+    """
     id = db[task]["id"]
     name = db[task]["name"]
     desc = db[task]["description"]
@@ -14,12 +21,24 @@ def print_task(task, db):
 
 
 def delete_from_ts(index):
+    """
+    Deletes a task from the database by its index.
+    
+    Args:
+        index (int): The index of the task to delete.
+    """
     db = wrjson.read_from_json_file(pathdb)
     db[index] = {}
     wrjson.write_to_json_file(pathdb, db)
 
 
 def task_list(status="all"):
+    """
+    Lists tasks based on their status.
+    
+    Args:
+        status (str): The status of tasks to list. Can be 'all', 'done', 'todo', or 'in-progress'.
+    """
     db = wrjson.read_from_json_file(pathdb)
     for task in db:
         for index in task:
@@ -43,6 +62,12 @@ def task_list(status="all"):
 
 
 def ts_mark_done(index):
+    """
+    Marks a task as done by its index.
+    
+    Args:
+        index (int): The index of the task to mark as done.
+    """
     db = wrjson.read_from_json_file(pathdb)
     db[index]["status"] = "done"
     db[index]["statusId"] = "2"
@@ -50,6 +75,12 @@ def ts_mark_done(index):
 
 
 def ts_mark_in_progress(index):
+    """
+    Marks a task as in progress by its index.
+    
+    Args:
+        index (int): The index of the task to mark as in progress.
+    """
     db = wrjson.read_from_json_file(pathdb)
     db[index]["status"] = "in-progress"
     db[index]["statusId"] = "1"
@@ -57,12 +88,26 @@ def ts_mark_in_progress(index):
 
 
 def ts_mark_to_do(index):
+    """
+    Marks a task as to do by its index.
+    
+    Args:
+        index (int): The index of the task to mark as to do.
+    """
     db = wrjson.read_from_json_file(pathdb)
     db[index]["status"] = "todo"
     db[index]["statusId"] = "0"
     wrjson.write_to_json_file(pathdb, db)
 
+
 def ts_description_change(index, description):
+    """
+    Changes the description of a task by its index.
+    
+    Args:
+        index (int): The index of the task to change.
+        description (str): The new description for the task.
+    """
     db = wrjson.read_from_json_file(pathdb)
     db[index]["description"] = description
     wrjson.write_to_json_file(pathdb,db)
@@ -70,6 +115,12 @@ def ts_description_change(index, description):
 
 class Task:
     def __init__(self, name):
+        """
+        Initializes a new task with the given name.
+        
+        Args:
+            name (str): The name of the task.
+        """
         current_timestamp = datefonc.get_current_time_intimestamp()
         newid = wrjson.create_new_idTask(pathdb)
         self.id = newid
@@ -81,6 +132,12 @@ class Task:
         self.updateAT = current_timestamp
 
     def __str__(self):
+        """
+        Returns a string representation of the task.
+        
+        Returns:
+            str: A string representation of the task.
+        """
         idstr = f"'id':'{self.id}',"
         namestr = f"'name':'{self.name}',"
         descstr = f"'description':'{self.description}',"
@@ -92,6 +149,12 @@ class Task:
         return "{"+idstr+descstr+statusidstr+statusstr+createATstr+updateATstr+"}"
 
     def class_to_json(self):
+        """
+        Converts the task instance to a JSON serializable dictionary.
+        
+        Returns:
+            dict: A dictionary representation of the task.
+        """
         json_object = {}
         json_object["id"] = self.id
         json_object["name"] = self.name
@@ -104,6 +167,9 @@ class Task:
         return json_object
 
     def add_new_task(self):
+        """
+        Adds the task to the database.
+        """
         db = wrjson.read_from_json_file(pathdb)
         db[self.id] = self.class_to_json()
         wrjson.write_to_json_file(pathdb, db)
