@@ -1,6 +1,7 @@
 import unittest
 from utils import task
 
+
 class TestTaskClass(unittest.TestCase):
     def test_task_initialization(self):
         t = task.Task('Test Task')
@@ -21,6 +22,7 @@ class TestTaskClass(unittest.TestCase):
         s = str(t)
         self.assertIn('name', s)
         self.assertIn('status', s)
+
 
 if __name__ == "__main__":
     unittest.main()

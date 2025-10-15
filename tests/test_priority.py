@@ -1,6 +1,7 @@
 import unittest
 from utils import task
 
+
 class TestTaskPriority(unittest.TestCase):
     def test_priority_initialization(self):
         t = task.Task('Priority Test')
@@ -15,6 +16,7 @@ class TestTaskPriority(unittest.TestCase):
         from utils import wrjson
         db = wrjson.read_from_json_file(task.pathdb)
         self.assertEqual(db[t.id]['priority'], 2)
+
 
 if __name__ == "__main__":
     unittest.main()
