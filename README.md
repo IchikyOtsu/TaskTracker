@@ -26,13 +26,6 @@ To use the TaskTracker application, run the following command:
 python main.py
 ```
 
-You can create a new task by calling the appropriate functions in the `task.py` module. For example:
-```python
-from utils.task import Task
-
-new_task = Task(name="My New Task")
-```
-
 ## Contributing
 Contributions are welcome! Please submit a pull request or open an issue for any enhancements or bug fixes.
 
@@ -40,4 +33,5 @@ Contributions are welcome! Please submit a pull request or open an issue for any
 This project is licensed under the MIT License.
 
 ## Contact Information
-For any inquiries, please contact the project maintainer at [your-email@example.com].
+For any inquiries, please contact me !
+
