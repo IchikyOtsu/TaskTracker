@@ -146,7 +146,7 @@ class Task:
         createATstr = f"'createAT':'{self.createAT}',"
         updateATstr = f"'updateAT':'{self.updateAT}'"
 
-        return "{"+idstr+descstr+statusidstr+statusstr+createATstr+updateATstr+"}"
+        return "{"+idstr+namestr+descstr+statusidstr+statusstr+createATstr+updateATstr+"}"
 
     def class_to_json(self):
         """

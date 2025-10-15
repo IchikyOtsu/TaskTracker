@@ -35,6 +35,8 @@ This project is licensed under the MIT License.
 ## Contact Information
 For any inquiries, please contact me !
 
+## Testing 
+python -m unittest discover tests
 ---
 
 ## 🚀 Future Improvements & Roadmap
@@ -49,7 +51,7 @@ This section outlines potential enhancements and features that could be added to
 - [ ] Add type hints throughout the codebase
 
 ### 🧪 Testing
-- [ ] Create comprehensive unit tests for all utility functions
+- [x] Create comprehensive unit tests for all utility functions
 - [ ] Add integration tests for CLI commands
 - [ ] Set up pytest and measure code coverage
 - [ ] Test edge cases and error scenarios
