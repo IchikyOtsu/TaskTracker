@@ -116,8 +116,23 @@ def ts_description_change(index, description):
     db[index]["updateAT"] = datefonc.get_current_time_intimestamp()
     wrjson.write_to_json_file(pathdb,db)
 
+def ts_change_priority(index, priority):
+    """
+    Changes the priority of a task by its index.
+
+    Args:
+        index (int): The index of the task to change.
+        priority (int): The new priority level to assign.
+    """
+    db = wrjson.read_from_json_file(pathdb)
+    db[index]["priority"] = priority
+    wrjson.write_to_json_file(pathdb,db)
+
 
 class Task:
+    """
+    Represents a task with attributes such as name, status, timestamps, and priority.
+    """
     def __init__(self, name):
         """
         Initializes a new task with the given name.
@@ -134,6 +149,7 @@ class Task:
         self.status = "todo"
         self.createAT = current_timestamp
         self.updateAT = current_timestamp
+        self.priority = 0
 
     def __str__(self):
         """
@@ -167,6 +183,7 @@ class Task:
         json_object["status"] = self.status
         json_object["createAT"] = self.createAT
         json_object["updateAT"] = self.updateAT
+        json_object["priority"] = self.priority
 
         return json_object
 

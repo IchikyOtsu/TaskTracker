@@ -124,6 +124,24 @@ def description(task_id, description):
     ts.ts_description_change(task_id,description)
     print(f"Description has been successfully modified !")
 
+@click.command()
+@click.argument("task_id")
+@click.argument("priority")
+def priority(task_id,priority):
+    """
+    Set the priority of a task.
+
+    :param task_id: The ID of the task to update.
+    :param priority: The priority level to assign (integer, e.g., 0 to 3).
+    """
+    try:
+        task_is_int = int(task_id)
+        priority_is_int = int(priority)
+    except:
+        print("Task id and priority(0 to 3) have to be an integer ! ")
+        return
+    ts.ts_change_priority(task_id,priority)
+    print(f"The task number {task_id} has the priority P{priority}.")
 
 cli.add_command(delete)
 cli.add_command(add)
@@ -132,6 +150,7 @@ cli.add_command(mark_done)
 cli.add_command(mark_in_progress)
 cli.add_command(mark_to_do)
 cli.add_command(description)
+cli.add_command(priority)
 
 if __name__ == "__main__":
     cli()

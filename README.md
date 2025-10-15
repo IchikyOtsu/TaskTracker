@@ -60,7 +60,7 @@ This section outlines potential enhancements and features that could be added to
 - [ ] Move hardcoded paths to configuration file
 - [ ] Consider migrating from JSON to SQLite for better performance
 - [ ] Add database backup/restore functionality
-- [ ] Implement task priority levels
+- [X] Implement task priority levels
 - [ ] Support due dates and reminders
 - [ ] Add task categories/tags
 - [ ] Support subtasks and task dependencies
