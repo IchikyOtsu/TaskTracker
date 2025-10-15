@@ -70,12 +70,26 @@ def delete(task_id):
     print(f"Task Number {task_id} has been removed")
 
 
+@click.command()
+@click.argument('Task_ID')
+@click.argument('description')
+def description(task_id, description):
+    try:
+        task_is_int = int(task_id)
+    except:
+        print("Id have to be an integer")
+        return
+    ts.ts_description_change(task_id,description)
+    print(f"Description has been successfully modified !")
+
+
 cli.add_command(delete)
 cli.add_command(add)
 cli.add_command(list)
 cli.add_command(mark_done)
 cli.add_command(mark_in_progress)
 cli.add_command(mark_to_do)
+cli.add_command(description)
 
 if __name__ == "__main__":
     cli()

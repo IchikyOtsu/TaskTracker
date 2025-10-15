@@ -62,6 +62,11 @@ def ts_mark_to_do(index):
     db[index]["statusId"] = "0"
     wrjson.write_to_json_file(pathdb, db)
 
+def ts_description_change(index, description):
+    db = wrjson.read_from_json_file(pathdb)
+    db[index]["description"] = description
+    wrjson.write_to_json_file(pathdb,db)
+
 
 class Task:
     def __init__(self, name):
