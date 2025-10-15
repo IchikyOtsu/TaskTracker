@@ -5,7 +5,7 @@ import time
 def get_current_time():
     """
     Returns the current local date and time.
-    
+
     Returns:
         datetime: The current local date and time.
     """
@@ -15,7 +15,7 @@ def get_current_time():
 def get_current_time_intimestamp():
     """
     Returns the current time as a Unix timestamp.
-    
+
     Returns:
         float: The current time as a Unix timestamp.
     """

@@ -7,7 +7,7 @@ pathdb = "db.json"
 def print_task(task, db):
     """
     Prints the details of a task from the database.
-    
+
     Args:
         task (str): The task identifier.
         db (dict): The database containing task information.
@@ -23,7 +23,7 @@ def print_task(task, db):
 def delete_from_ts(index):
     """
     Deletes a task from the database by its index.
-    
+
     Args:
         index (int): The index of the task to delete.
     """
@@ -35,7 +35,7 @@ def delete_from_ts(index):
 def task_list(status="all"):
     """
     Lists tasks based on their status.
-    
+
     Args:
         status (str): The status of tasks to list. Can be 'all', 'done', 'todo', or 'in-progress'.
     """
@@ -64,60 +64,81 @@ def task_list(status="all"):
 def ts_mark_done(index):
     """
     Marks a task as done by its index.
-    
+
     Args:
         index (int): The index of the task to mark as done.
     """
     db = wrjson.read_from_json_file(pathdb)
     db[index]["status"] = "done"
     db[index]["statusId"] = "2"
+    db[index]["updateAT"] = datefonc.get_current_time_intimestamp()
     wrjson.write_to_json_file(pathdb, db)
 
 
 def ts_mark_in_progress(index):
     """
     Marks a task as in progress by its index.
-    
+
     Args:
         index (int): The index of the task to mark as in progress.
     """
     db = wrjson.read_from_json_file(pathdb)
     db[index]["status"] = "in-progress"
     db[index]["statusId"] = "1"
+    db[index]["updateAT"] = datefonc.get_current_time_intimestamp()
     wrjson.write_to_json_file(pathdb, db)
 
 
 def ts_mark_to_do(index):
     """
     Marks a task as to do by its index.
-    
+
     Args:
         index (int): The index of the task to mark as to do.
     """
     db = wrjson.read_from_json_file(pathdb)
     db[index]["status"] = "todo"
     db[index]["statusId"] = "0"
+    db[index]["updateAT"] = datefonc.get_current_time_intimestamp()
     wrjson.write_to_json_file(pathdb, db)
 
 
 def ts_description_change(index, description):
     """
     Changes the description of a task by its index.
-    
+
     Args:
         index (int): The index of the task to change.
         description (str): The new description for the task.
     """
     db = wrjson.read_from_json_file(pathdb)
     db[index]["description"] = description
-    wrjson.write_to_json_file(pathdb,db)
+    db[index]["updateAT"] = datefonc.get_current_time_intimestamp()
+    wrjson.write_to_json_file(pathdb, db)
+
+
+def ts_change_priority(index, priority):
+    """
+    Changes the priority of a task by its index.
+
+    Args:
+        index (int): The index of the task to change.
+        priority (int): The new priority level to assign.
+    """
+    db = wrjson.read_from_json_file(pathdb)
+    db[index]["priority"] = priority
+    wrjson.write_to_json_file(pathdb, db)
 
 
 class Task:
+    """
+    Represents a task with attributes such as name, status, timestamps, and priority.
+    """
+
     def __init__(self, name):
         """
         Initializes a new task with the given name.
-        
+
         Args:
             name (str): The name of the task.
         """
@@ -130,11 +151,12 @@ class Task:
         self.status = "todo"
         self.createAT = current_timestamp
         self.updateAT = current_timestamp
+        self.priority = 0
 
     def __str__(self):
         """
         Returns a string representation of the task.
-        
+
         Returns:
             str: A string representation of the task.
         """
@@ -146,12 +168,12 @@ class Task:
         createATstr = f"'createAT':'{self.createAT}',"
         updateATstr = f"'updateAT':'{self.updateAT}'"
 
-        return "{"+idstr+descstr+statusidstr+statusstr+createATstr+updateATstr+"}"
+        return "{"+idstr+namestr+descstr+statusidstr+statusstr+createATstr+updateATstr+"}"
 
     def class_to_json(self):
         """
         Converts the task instance to a JSON serializable dictionary.
-        
+
         Returns:
             dict: A dictionary representation of the task.
         """
@@ -163,6 +185,7 @@ class Task:
         json_object["status"] = self.status
         json_object["createAT"] = self.createAT
         json_object["updateAT"] = self.updateAT
+        json_object["priority"] = self.priority
 
         return json_object
 
