@@ -71,6 +71,7 @@ def ts_mark_done(index):
     db = wrjson.read_from_json_file(pathdb)
     db[index]["status"] = "done"
     db[index]["statusId"] = "2"
+    db[index]["updateAT"] = datefonc.get_current_time_intimestamp()
     wrjson.write_to_json_file(pathdb, db)
 
 
@@ -84,6 +85,7 @@ def ts_mark_in_progress(index):
     db = wrjson.read_from_json_file(pathdb)
     db[index]["status"] = "in-progress"
     db[index]["statusId"] = "1"
+    db[index]["updateAT"] = datefonc.get_current_time_intimestamp()
     wrjson.write_to_json_file(pathdb, db)
 
 
@@ -97,6 +99,7 @@ def ts_mark_to_do(index):
     db = wrjson.read_from_json_file(pathdb)
     db[index]["status"] = "todo"
     db[index]["statusId"] = "0"
+    db[index]["updateAT"] = datefonc.get_current_time_intimestamp()
     wrjson.write_to_json_file(pathdb, db)
 
 
@@ -110,6 +113,7 @@ def ts_description_change(index, description):
     """
     db = wrjson.read_from_json_file(pathdb)
     db[index]["description"] = description
+    db[index]["updateAT"] = datefonc.get_current_time_intimestamp()
     wrjson.write_to_json_file(pathdb,db)
 
 
